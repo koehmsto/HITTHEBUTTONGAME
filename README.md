@@ -1,6 +1,6 @@
 Hit the Button Game
 
-  My game is an arcade style game with the goal of hitting the button at the right time. A light will go around in a circle and the player will need to hit the button at the right time when the light is in a random position on the     board. 
+  My game is an arcade style game with the goal of hitting the button at the right time. A light will go around in a circle and the player will need to hit the button at the right time when the light is in a random position on the     board. The moving light will speed up after every successful hit. It will stay the same speed if the light is missed. If the player misses 3 times, the game will end. Changing the switch mid game will end the game and restart it when it is turned back.
 
 Rules
 
@@ -12,4 +12,4 @@ Rules
 
 Objective
 	
-  The objective of this game is to hit the button until the light has moved to its  fastest speed. If the player successfully beats the last level, the game will end and the player will be able to restart. 
+  The objective of this game is to hit the button until the light has moved to its fastest speed. If the player successfully beats the last level, the game will end and the player will be able to restart. 
