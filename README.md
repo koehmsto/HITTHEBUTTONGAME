@@ -4,11 +4,11 @@
 
 # Rules
 
-  If the player misses the light more than 3 times, the game will end and the player will have to restart the game.
-  The game will get faster and faster as the player gets better.
-  The game will play a low tone for a miss, and a high pitched tone for hit.
-  If the player gets a hit, there score will be increased
-  If the player wants to end the game at any point, they can turn toggle the switch.
+ * If the player misses the light more than 3 times, the game will end and the player will have to restart the game.
+ * The game will get faster and faster as the player gets better.
+ * The game will play a low tone for a miss, and a high pitched tone for hit.
+ * If the player gets a hit, there score will be increased
+ * If the player wants to end the game at any point, they can turn toggle the switch.
 
 # Objective
 	
