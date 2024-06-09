@@ -21,7 +21,7 @@ void setup() {
   randomSeed(analogRead(A6));  // seeds the random number with the signal from A6
   constantPixel = random(0, 10);
   CircuitPlayground.setPixelColor(constantPixel, 0x00FF00);  // Green color for constant pixel
-  Serial.println("Loop Start setu p");
+  
 }
 
 void loop() {
@@ -92,7 +92,6 @@ void loop() {
           missAmount++;  // increment miss amount
           CircuitPlayground.playTone(200, 200);
           Serial.println("Miss!");
-          Serial.println(missAmount);
           buttonInterrupt = false;
           if (missAmount > 2) {  // if more than 2 misses, the game will end and execute missedAmount
             isGameRunning = false;
@@ -126,7 +125,6 @@ void loop() {
   if (button2Interrupt == true) {
     missAmount = 0;
     gameSpeed = 500;
-    Serial.println("Interrupt");
     CircuitPlayground.setPixelColor(constantPixel, 0x000000);
     constantPixel = random(0, 10);
     CircuitPlayground.setPixelColor(constantPixel, 0x00FF00);  // Green color for constant pixel
@@ -156,7 +154,6 @@ void buttonISR() {
 }
 
 void button2ISR() {
-  Serial.println("Button2ISR");
   button2Interrupt = true;
 }
 
