@@ -53,7 +53,7 @@ void loop() {
       else
         previousPixel = p + 1;
 
-      // Ensure previousPixel is within bounds
+      // check if previousPixel is within bounds, worked ok without this but sometimes pixels got stuck on for some weird reason
       if (previousPixel < 0) previousPixel = 9;
       if (previousPixel > 9) previousPixel = 0;
 
@@ -61,15 +61,16 @@ void loop() {
         CircuitPlayground.setPixelColor(previousPixel, 0x000000);  // Reset previous pixel
       }
 
-      delay(gameSpeed);
+      delay(gameSpeed); // controls the game speed by shortening delay between how fast lights move
 
       // Check if the button is pressed
       if (buttonInterrupt == true) {
         if (p == constantPixel) {
-          playerScore++;
+          playerScore++; 
 
-          Serial.println("Hit!");
-          
+          Serial.print("Hit! Score: ");
+          Serial.print(playerScore);
+          Serial.print("Get to 10!");
           CircuitPlayground.playTone(440, 200);  // Play a sound to indicate a hit
           // Set a new constant pixel
           CircuitPlayground.setPixelColor(constantPixel, 0x000000);
@@ -105,16 +106,16 @@ void loop() {
   }
   if(!switchFlag) { 
     while (!switchFlag) {
-      delay(100); // Wait for the switch to be toggled back on
+      delay(100); // wait for the switch to be toggled back on
     }
-    // Restart the game
+    // restart the game
     missAmount = 0;
     gameSpeed = 500;
     isGameRunning = true;
-    constantPixel = random(0, 10); // Update constantPixel when the game restarts
-    CircuitPlayground.setPixelColor(constantPixel, 0x00FF00);  // Green color for constant pixel
+    constantPixel = random(0, 10); // update constantPixel when the game restarts
+    CircuitPlayground.setPixelColor(constantPixel, 0x00FF00);  // green color for constant pixel
   }
-  if (isGameRunning == true) {
+  if (isGameRunning == true) { // check to make sure the the bottom pixels dont get stuck on
     if (forward && 9 != constantPixel) {
       CircuitPlayground.setPixelColor(9, 0x000000); 
     } else if (0 != constantPixel) {
@@ -122,7 +123,7 @@ void loop() {
     }
   }
 
-  if (button2Interrupt == true) {
+  if (button2Interrupt == true) { // restarts game after win if button 2 is clicked
     missAmount = 0;
     gameSpeed = 500;
     CircuitPlayground.setPixelColor(constantPixel, 0x000000);
@@ -158,13 +159,13 @@ void button2ISR() {
 }
 
 void switchISR() {
-  // Delay to debounce the switch
+  // delay to debounce the switch
   delay(50);
 
-  // Read the current state of the switch pin
+  // read the current state of the switch pin
   int switchState = digitalRead(7);
 
-  // Update the switchFlag only if the switch state is different
+  // update the switchFlag only if the switch state is different
   if (switchState != switchFlag) {
     switchFlag = switchState;
   }
