@@ -36,7 +36,7 @@ void loop() {
         isGameRunning = false;
         break;
       }
-      if (forward)
+      if (forward) // credit goes to my dad for idea for the int p to flip the rotation of the light
         p = i;
       else
         p = 9 - i;
@@ -48,7 +48,7 @@ void loop() {
       }
 
       int previousPixel;  // Turn off the previous pixel
-      if (forward)
+      if (forward) 
         previousPixel = p - 1;
       else
         previousPixel = p + 1;
@@ -63,9 +63,9 @@ void loop() {
 
       delay(gameSpeed); // controls the game speed by shortening delay between how fast lights move
 
-      // Check if the button is pressed
+      // check if the button is pressed
       if (buttonInterrupt == true) {
-        if (p == constantPixel) {
+        if (p == constantPixel) { // checks if the button was clicked at the right time
           playerScore++; 
 
           Serial.print("Hit! Score: ");
@@ -75,7 +75,7 @@ void loop() {
           // Set a new constant pixel
           CircuitPlayground.setPixelColor(constantPixel, 0x000000);
           constantPixel = random(0, 10);
-          CircuitPlayground.setPixelColor(constantPixel, 0x00FF00);  // Green color for new constant pixel
+          CircuitPlayground.setPixelColor(constantPixel, 0x00FF00);  // green color for new constant pixel
           gameSpeed = gameSpeed - 50;                                // increases game speed for each time the green dot is hit
           if (gameSpeed < 50) {                                      // end game if speed gets to 0
             CircuitPlayground.clearPixels();
@@ -159,14 +159,11 @@ void button2ISR() {
 }
 
 void switchISR() {
-  // delay to debounce the switch
-  delay(50);
+  delay(50); // delay to debounce the switch
 
-  // read the current state of the switch pin
-  int switchState = digitalRead(7);
+  int switchState = digitalRead(7); // read the current state of the switch pin
 
-  // update the switchFlag only if the switch state is different
-  if (switchState != switchFlag) {
+  if (switchState != switchFlag) {   // update the switchFlag only if the switch state is different
     switchFlag = switchState;
   }
 }
