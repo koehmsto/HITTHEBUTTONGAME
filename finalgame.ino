@@ -28,7 +28,7 @@ void loop() {
   while (isGameRunning) {    // game is in playing state
     
     for (int i = 0; i < 10; i++) {  // makes dot go in circle
-      int p;
+      int p; 
       if(!switchFlag) {
         CircuitPlayground.clearPixels();
         missAmount = 0;
@@ -43,7 +43,7 @@ void loop() {
 
       CircuitPlayground.setPixelColor(p, 0xFF0000);  // Red color for the moving pixel
 
-      if (constantPixel == p) {
+      if (constantPixel == p) { 
         CircuitPlayground.setPixelColor(constantPixel, 0x00FF00);  // Makes the constant pixel stay green while the moving red goes over it
       }
 
@@ -70,14 +70,19 @@ void loop() {
 
           Serial.print("Hit! Score: ");
           Serial.print(playerScore);
-          Serial.print("Get to 10!");
+          Serial.println("/10");
           CircuitPlayground.playTone(440, 200);  // Play a sound to indicate a hit
           // Set a new constant pixel
           CircuitPlayground.setPixelColor(constantPixel, 0x000000);
           constantPixel = random(0, 10);
           CircuitPlayground.setPixelColor(constantPixel, 0x00FF00);  // green color for new constant pixel
-          gameSpeed = gameSpeed - 50;                                // increases game speed for each time the green dot is hit
-          if (gameSpeed < 50) {                                      // end game if speed gets to 0
+          gameSpeed = gameSpeed - 50;  // increases game speed for each time the green dot is hit
+          if (gameSpeed < 50) {  // end game if speed gets to 0
+            Serial.println("You won!");
+            Serial.println("Click the right button to restart.");
+            playerScore = 0;
+            missAmount = 0;
+
             CircuitPlayground.clearPixels();
             CircuitPlayground.playTone(500, 100); //win tone
             CircuitPlayground.playTone(700, 200);
@@ -91,10 +96,14 @@ void loop() {
           break;
         } else {
           missAmount++;  // increment miss amount
+          Serial.print("Miss! You've missed: ");
+          Serial.print(missAmount);
+          Serial.println("/3");
           CircuitPlayground.playTone(200, 200);
-          Serial.println("Miss!");
           buttonInterrupt = false;
           if (missAmount > 2) {  // if more than 2 misses, the game will end and execute missedAmount
+            Serial.println("You lost. Click the right button to restart.");
+            playerScore = 0;
             isGameRunning = false;
             missedAmount();
             gameSpeed = 500;
@@ -109,6 +118,7 @@ void loop() {
       delay(100); // wait for the switch to be toggled back on
     }
     // restart the game
+    playerScore = 0;
     missAmount = 0;
     gameSpeed = 500;
     isGameRunning = true;
