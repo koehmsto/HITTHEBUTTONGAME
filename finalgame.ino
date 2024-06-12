@@ -87,6 +87,7 @@ void loop() {
             CircuitPlayground.playTone(500, 100); //win tone
             CircuitPlayground.playTone(700, 200);
             CircuitPlayground.playTone(500, 100);
+            CircuitPlayground.playTone(700, 200);
             isGameRunning = false;
 
             CircuitPlayground.clearPixels();
